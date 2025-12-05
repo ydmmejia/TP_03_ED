@@ -23,8 +23,13 @@ void SenalECG::cargarDesdeArchivo(std::string nombreArchivo) {
         throw std::runtime_error("no se pudo abrir el archivo");
     }
     
+    std::string encabezado;
+    std::getline(archivo, encabezado);
+    
     double tiempo, amplitud;
-    while (archivo >> amplitud >> tiempo) {
+    char coma; //variable auxiliar para leer la coma
+    
+    while (archivo >> amplitud >> coma >> tiempo) {
         NodoECG* nuevo = new NodoECG(tiempo, amplitud);
         
         if (cabeza == nullptr) {
